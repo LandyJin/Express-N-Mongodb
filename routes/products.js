@@ -4,7 +4,8 @@ const router = Router();
 const Product = require('../models/product')
 
 router.use((req, res, next) => {
-    if (req.session.user) next()
+    console.log('Inside products auth check middleware', req.user)
+    if (req.user) next()
     else res.send(401)
 })
 
