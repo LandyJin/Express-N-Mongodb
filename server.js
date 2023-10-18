@@ -1,10 +1,12 @@
 const express = require("express")
 const app = express()
+require('dotenv').config()
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const MongoStore = require('connect-mongo');
 const passport = require('passport')
-require('./strategies/local')
+// require('./strategies/local')
+require('./strategies/discord')
 
 const productsRoutes = require('./routes/products')
 const authRoutes = require('./routes/auth')
@@ -15,7 +17,7 @@ app.use(express.json())
 
 app.use(cookieParser())
 app.use(session({
-    secret: 'secretkey',
+    secret: process.env.SESSION_SECREAT,
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
